@@ -100,7 +100,7 @@
 			if (!this.isInput) {
 			}
 			var that = this;
-			$(document).on('mousedown', function(ev){
+			$(document).on('mousedown.dp', function(ev){
 				if ($(ev.target).closest('.datepicker').length == 0) {
 					that.hide();
 				}
@@ -117,13 +117,12 @@
 			this.viewMode = this.startViewMode;
 			this.showMode();
 			if (!this.isInput) {
-				$(document).off('mousedown', this.hide);
+				$(document).off('mousedown.dp', this.hide);
 			}
-			//this.set();
-			this.element.trigger({
+			/*this.element.trigger({ // This part breaks other mousedown listeners, so commenting out for now until I have time to fix
 				type: 'hide',
 				date: this.date
-			});
+			});*/
 		},
 		
 		set: function() {
@@ -282,7 +281,6 @@
 							// If the date format is mm-yyyy, hide after a slight delay so user can see that their
 							// click was accepted before the datepicker hides
 							if (this.format.parts.join('-').toLowerCase() == 'mm-yyyy') {
-							alert('here; ' + this.format.parts.join('-').toLowerCase());
 								var obj = this;
 								setTimeout(function() {
 									obj.hide();
